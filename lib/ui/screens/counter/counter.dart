@@ -11,13 +11,10 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Counter Test Bloc"),
+        centerTitle: true,
       ),
       body: BlocBuilder<CounterBlocBloc, CounterBlocState>(
         builder: (BuildContext context, state) {
-          final counter =
-              (state is CounterBlocChangeValue || state is CounterBlocInitial)
-                  ? (state as dynamic).counter
-                  : 0;
           return Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -25,23 +22,23 @@ class MyHomePage extends StatelessWidget {
                 FloatingActionButton(
                   onPressed: () =>
                       context.read<CounterBlocBloc>().add(CounterBlocPlus()),
-                  tooltip: 'Increment',
+                  tooltip: 'Plus',
                   child: const Icon(Icons.add),
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: 40,
                 ),
                 Text(
-                  '$counter',
+                  state.counter.toString(),
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: 40,
                 ),
                 FloatingActionButton(
                   onPressed: () =>
                       context.read<CounterBlocBloc>().add(CounterBlocMunis()),
-                  tooltip: 'Decrement',
+                  tooltip: 'Munis',
                   child: const Icon(Icons.remove),
                 ),
               ],
